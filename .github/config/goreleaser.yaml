@@ -1,0 +1,42 @@
+before:
+  hooks:
+    - make modsync
+dist: bin
+project_name: ecr-credential-provider
+env:
+  - DOCKER_REPO="ghcr.io/dntosas"
+builds:
+  - env:
+      - CGO_ENABLED=0
+    binary: "{{ .ProjectName }}"
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+      - -mod=vendor
+    ldflags:
+      - -s -w
+      - -X {{ .ProjectName }}/cmd.Version={{ .Version }}
+      - -X {{ .ProjectName }}/cmd.CommitHash={{ .FullCommit }}
+    main: .
+    hooks:
+      post: chmod +x "{{ .Path }}"
+
+archives:
+  - format: binary
+    # this name template makes the OS and Arch compatible with the results of uname.
+    name_template: >-
+      {{ tolower .ProjectName }}-{{ tolower .Os }}-{{ if eq .Arch "amd64" }}amd64{{ else if eq .Arch "arm64" }}arm64{{- else }}{{ .Arch }}{{ end }}
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-SNAPSHOT"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^Merge\spull\srequest\s'
