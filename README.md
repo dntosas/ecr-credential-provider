@@ -10,5 +10,5 @@ Cobebase will remain in-sync with parent repo but in here we provide building bi
 |------------------|--------------|-------------------|---------------------------------------|
 | Linux            | amd64        | :white_check_mark: | [Download](https://github.com/dntosas/ecr-credential-provider/releases)                         |
 | Linux            | arm64        | :white_check_mark: | [Download](https://github.com/dntosas/ecr-credential-provider/releases)                         |
-| Windows          | amd64        | :x:               | [Download](https://github.com/dntosas/ecr-credential-provider/releases)                         |
-| Windows          | arm64        | :x:               | [Download](https://github.com/dntosas/ecr-credential-provider/releases)                         |
+| Windows          | amd64        | :white_check_mark:               | [Download](https://github.com/dntosas/ecr-credential-provider/releases)                         |
+| Windows          | arm64        | :white_check_mark:               | [Download](https://github.com/dntosas/ecr-credential-provider/releases)                         |
