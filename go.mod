@@ -1,13 +1,12 @@
 module github.com/dntosas/ecr-credential-provider
 
 go 1.22.0
-
 require (
 	github.com/aws/aws-sdk-go v1.51.28
 	github.com/golang/mock v1.6.0
 	github.com/spf13/cobra v1.8.0
 	k8s.io/apimachinery v0.30.0
-	k8s.io/cloud-provider-aws v1.29.2
+	k8s.io/cloud-provider-aws v1.30.0
 	k8s.io/component-base v0.30.0
 	k8s.io/klog/v2 v2.120.1
 	k8s.io/kubelet v0.30.0
@@ -40,7 +39,7 @@ require (
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	k8s.io/utils v0.0.0-20230726121419-3b25d923346b // indirect
+	k8s.io/utils v0.0.0-20240310230437-4693a0247e57 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
