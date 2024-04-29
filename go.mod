@@ -3,7 +3,7 @@ module github.com/dntosas/ecr-credential-provider
 go 1.22.0
 
 require (
-	github.com/aws/aws-sdk-go v1.51.28
+	github.com/aws/aws-sdk-go v1.51.30
 	github.com/golang/mock v1.6.0
 	github.com/spf13/cobra v1.8.0
 	k8s.io/apimachinery v0.30.0
