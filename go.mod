@@ -6,9 +6,9 @@ require (
 	github.com/aws/aws-sdk-go v1.52.4
 	github.com/golang/mock v1.6.0
 	github.com/spf13/cobra v1.8.0
-	k8s.io/apimachinery v0.30.0
+	k8s.io/apimachinery v0.30.1
 	k8s.io/cloud-provider-aws v1.29.2
-	k8s.io/component-base v0.30.0
+	k8s.io/component-base v0.30.1
 	k8s.io/klog/v2 v2.120.1
 	k8s.io/kubelet v0.30.0
 )
