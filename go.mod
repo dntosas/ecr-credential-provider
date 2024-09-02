@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/aws/aws-sdk-go v1.55.5
 	github.com/golang/mock v1.6.0
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 	k8s.io/apimachinery v0.30.2
 	k8s.io/cloud-provider-aws v1.29.2
 	k8s.io/component-base v0.30.2
