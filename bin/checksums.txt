@@ -1,0 +1,4 @@
+ff37a1a09678c1f6074ac69ab90799de73619dead6aceceb785893f457ceddc7  ecr-credential-provider-linux-amd64
+e4dbe660c29bd9947f684ddf6ba3ccdf28665b6ca443abe1e947a9f029dbea12  ecr-credential-provider-linux-arm64
+4f3f29c9049af16065fd77d7303204b6f695f9346ac326d089288b65ab123f80  ecr-credential-provider-windows-amd64.exe
+e194e1c59cf85492a786a22c509071322f9b4950dd620c558ee5bef1b6658651  ecr-credential-provider-windows-arm64.exe

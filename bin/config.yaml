@@ -1,0 +1,137 @@
+version: 2
+project_name: ecr-credential-provider
+env:
+  - DOCKER_REPO="ghcr.io/dntosas"
+release:
+  github:
+    owner: dntosas
+    name: ecr-credential-provider
+  name_template: '{{.Tag}}'
+builds:
+  - id: ecr-credential-provider
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    goamd64:
+      - v1
+    go386:
+      - sse2
+    goarm:
+      - "6"
+    goarm64:
+      - v8.0
+    gomips:
+      - hardfloat
+    goppc64:
+      - power8
+    goriscv64:
+      - rva20u64
+    targets:
+      - linux_amd64_v1
+      - linux_arm64_v8.0
+      - windows_amd64_v1
+      - windows_arm64_v8.0
+    dir: .
+    main: .
+    binary: '{{ .ProjectName }}'
+    hooks:
+      post:
+        - cmd: chmod +x "{{ .Path }}"
+    builder: go
+    gobinary: go
+    command: build
+    ldflags:
+      - -s -w
+      - -X {{ .ProjectName }}/cmd.Version={{ .Version }}
+      - -X {{ .ProjectName }}/cmd.CommitHash={{ .FullCommit }}
+    flags:
+      - -trimpath
+      - -mod=vendor
+    env:
+      - CGO_ENABLED=0
+archives:
+  - id: default
+    name_template: '{{ tolower .ProjectName }}-{{ tolower .Os }}-{{ if eq .Arch "amd64" }}amd64{{ else if eq .Arch "arm64" }}arm64{{- else }}{{ .Arch }}{{ end }}'
+    format: binary
+    files:
+      - src: license*
+      - src: LICENSE*
+      - src: readme*
+      - src: README*
+      - src: changelog*
+      - src: CHANGELOG*
+snapshot:
+  version_template: '{{ incpatch .Version }}-SNAPSHOT'
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256
+changelog:
+  filters:
+    exclude:
+      - ^Merge\spull\srequest\s
+  sort: asc
+  format: '{{ .SHA }}: {{ .Message }} ({{ with .AuthorUsername }}@{{ . }}{{ else }}{{ .AuthorName }} <{{ .AuthorEmail }}>{{ end }})'
+dist: bin
+env_files:
+  github_token: ~/.config/goreleaser/github_token
+  gitlab_token: ~/.config/goreleaser/gitlab_token
+  gitea_token: ~/.config/goreleaser/gitea_token
+before:
+  hooks:
+    - make modsync
+source:
+  name_template: '{{ .ProjectName }}-{{ .Version }}'
+  format: tar.gz
+gomod:
+  gobinary: go
+announce:
+  twitter:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+  mastodon:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    server: ""
+  reddit:
+    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    url_template: '{{ .ReleaseURL }}'
+  slack:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    username: GoReleaser
+  discord:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    author: GoReleaser
+    color: "3888754"
+    icon_url: https://goreleaser.com/static/avatar.png
+  teams:
+    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    color: '#2D313E'
+    icon_url: https://goreleaser.com/static/avatar.png
+  smtp:
+    subject_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    body_template: 'You can view details from: {{ .ReleaseURL }}'
+  mattermost:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+    title_template: '{{ .ProjectName }} {{ .Tag }} is out!'
+    username: GoReleaser
+  linkedin:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+  telegram:
+    message_template: '{{ mdv2escape .ProjectName }} {{ mdv2escape .Tag }} is out{{ mdv2escape "!" }} Check it out at {{ mdv2escape .ReleaseURL }}'
+    parse_mode: MarkdownV2
+  webhook:
+    message_template: '{ "message": "{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"}'
+    content_type: application/json; charset=utf-8
+  opencollective:
+    title_template: '{{ .Tag }}'
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out!<br/>Check it out at <a href="{{ .ReleaseURL }}">{{ .ReleaseURL }}</a>'
+  bluesky:
+    message_template: '{{ .ProjectName }} {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}'
+git:
+  tag_sort: -version:refname
+github_urls:
+  download: https://github.com
+gitlab_urls:
+  download: https://gitlab.com
