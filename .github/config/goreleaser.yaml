@@ -1,3 +1,4 @@
+version: 2
 before:
   hooks:
     - make modsync
@@ -35,7 +36,7 @@ archives:
 checksum:
   name_template: 'checksums.txt'
 snapshot:
-  name_template: "{{ incpatch .Version }}-SNAPSHOT"
+  version_template: "{{ incpatch .Version }}-SNAPSHOT"
 changelog:
   sort: asc
   filters:
